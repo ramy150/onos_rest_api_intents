@@ -39,42 +39,38 @@ ovs-vsctl set-controller $1 tcp:$(docker inspect -f '{{range .NetworkSettings.Ne
 }
 
 
-create_ns red1
-create_ns red2
-create_ns red3
-create_ns red4
-create_ns red5
-create_ns blue1
-create_ns blue2
-create_ns blue3
-create_ns blue4
-create_ns blue5
+create_ns red
+create_ns blue
+create_ns green
+create_ns black
+create_ns yellow
+
 
 create_ovs_bridge br-1
 create_ovs_bridge br-2
 create_ovs_bridge br-3
 create_ovs_bridge br-4
 create_ovs_bridge br-5
+create_ovs_bridge br-6
+
 
 attach_ovs_to_ovs br-1 br-2 br-ovs12 br-ovs21 1
-attach_ovs_to_ovs br-2 br-3 br-ovs23 br-ovs32 2
-attach_ovs_to_ovs br-3 br-4 br-ovs34 br-ovs43 3
-attach_ovs_to_ovs br-4 br-5 br-ovs45 br-ovs54 4
+attach_ovs_to_ovs br-1 br-3 br-ovs13 br-ovs31 2
+attach_ovs_to_ovs br-1 br-4 br-ovs14 br-ovs41 3
+attach_ovs_to_ovs br-2 br-6 br-ovs26 br-ovs62 2
+attach_ovs_to_ovs br-3 br-5 br-ovs35 br-ovs53 1
+attach_ovs_to_ovs br-4 br-6 br-ovs46 br-ovs64 1
+attach_ovs_to_ovs br-5 br-6 br-ovs56 br-ovs65 3
 
 
 
-attach_ns_to_ovs red1 br-1 veth-red1 veth-red1-br 5 10.0.0.2
-attach_ns_to_ovs red2 br-2 veth-red2 veth-red2-br 5 10.0.0.3
-attach_ns_to_ovs red3 br-3 veth-red3 veth-red3-br 5 10.0.0.4
-attach_ns_to_ovs red4 br-4 veth-red4 veth-red4-br 5 10.0.0.5
-attach_ns_to_ovs red5 br-5 veth-red5 veth-red5-br 5 10.0.0.6
 
 
-attach_ns_to_ovs blue1 br-1 veth-blue1 veth-blue1-br 6 10.0.0.129
-attach_ns_to_ovs blue2 br-2 veth-blue2 veth-blue2-br 6 10.0.0.130
-attach_ns_to_ovs blue3 br-3 veth-blue3 veth-blue3-br 6 10.0.0.131
-attach_ns_to_ovs blue4 br-4 veth-blue4 veth-blue4-br 6 10.0.0.132
-attach_ns_to_ovs blue5 br-5 veth-blue5 veth-blue5-br 6 10.0.0.133
+attach_ns_to_ovs red br-1 veth-red veth-red-br 4 10.0.0.2
+attach_ns_to_ovs blue br-3 veth-blue veth-blue-br 3 10.0.0.3
+attach_ns_to_ovs green br-4 veth-green veth-green-br 2 10.0.0.4
+attach_ns_to_ovs black br-6 veth-black veth-black-br 4 10.0.0.5
+attach_ns_to_ovs yellow br-6 veth-yellow veth-yellow-br 5 10.0.0.6
 
 
 attach_ovs_to_sdn br-1
@@ -82,3 +78,4 @@ attach_ovs_to_sdn br-2
 attach_ovs_to_sdn br-3
 attach_ovs_to_sdn br-4
 attach_ovs_to_sdn br-5
+attach_ovs_to_sdn br-6
